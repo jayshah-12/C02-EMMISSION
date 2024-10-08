@@ -1,0 +1,11 @@
+[2024-10-01T09:07:14.566+0000] {processor.py:157} INFO - Started process (PID=67) to work on /opt/airflow/dags/dag.py
+[2024-10-01T09:07:14.572+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/dag.py for tasks to queue
+[2024-10-01T09:07:14.575+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:14.575+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/dag.py
+[2024-10-01T09:07:14.816+0000] {processor.py:839} INFO - DAG(s) dict_keys(['simple_dag']) retrieved from /opt/airflow/dags/dag.py
+[2024-10-01T09:07:16.546+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.546+0000] {manager.py:501} INFO - Created Permission View: can delete on DAG:simple_dag
+[2024-10-01T09:07:16.581+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.581+0000] {manager.py:501} INFO - Created Permission View: can read on DAG:simple_dag
+[2024-10-01T09:07:16.600+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.600+0000] {manager.py:501} INFO - Created Permission View: can edit on DAG:simple_dag
+[2024-10-01T09:07:16.639+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.638+0000] {dag.py:2907} INFO - Sync 1 DAGs
+[2024-10-01T09:07:16.722+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.721+0000] {dag.py:2929} INFO - Creating ORM DAG for simple_dag
+[2024-10-01T09:07:16.728+0000] {logging_mixin.py:151} INFO - [2024-10-01T09:07:16.728+0000] {dag.py:3677} INFO - Setting next_dagrun for simple_dag to None, run_after=None
+[2024-10-01T09:07:16.827+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/dag.py took 2.301 seconds
