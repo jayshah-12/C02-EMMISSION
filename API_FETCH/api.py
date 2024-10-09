@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 import mysql.connector
 from mysql.connector import Error
 import time
-
+import secret
 
 
 def fetch_data(api_url, params, no_of_records=None):
@@ -73,20 +73,20 @@ api3_params = {
     "data[0]": "value",
     "facets[productId][]": [116, 33, 37],
     "facets[countryRegionId][]": "USA",
-    "api_key":"ixxID9vFalaJnrWYcqNbAPMFRkmKIiC4OJlAGoae"
+    "api_key":secret.api_key
 
 }
 api1_params = {
     "frequency": "annual",
     "data[0]": "value",
-    "api_key": "ixxID9vFalaJnrWYcqNbAPMFRkmKIiC4OJlAGoae"
+    "api_key": secret.api_key
 }
 
 
 api2_params = {
     "frequency": "daily",
     "data[0]": "value",
-    "api_key":"ixxID9vFalaJnrWYcqNbAPMFRkmKIiC4OJlAGoae"
+    "api_key":secret.api_key
 }
 
 # print(api_key)
