@@ -13,7 +13,7 @@ def fetch_data(api_url, params, no_of_records=None):
     :param no_of_records: Maximum number of records to fetch (default is None, meaning fetch all records).
     :return: A pandas DataFrame containing the fetched data.
     """
-    params['offset'] = 1000000  
+    params['offset'] = 0  
     complete_data = pd.DataFrame()
     total_records_fetched = 0  
 
@@ -52,7 +52,7 @@ def mysql_connect(dataframe, table_name):
     mysql_connection_string = 'mysql+pymysql://root:root@localhost:3306/eia'
     engine = create_engine(mysql_connection_string)
  
-    dataframe.to_sql(table_name, con=engine, if_exists='append', index=False)
+    dataframe.to_sql(table_name, con=engine, if_exists='replace', index=False)
     print(f"{dataframe} stored in mysql")
 
 
