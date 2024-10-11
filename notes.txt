@@ -189,12 +189,12 @@ df1['value_in_mmt'] = df1.apply(case_statement, axis=1)
 
 
 
+renewable 
+capacity  - million kilowats
+generation - billionkilowatt hours
 
 
-worked on transformation
-1 - yearly co2 reduction
-2 - capacity increase
 
 
 
-$2a$10$fYFlXx8Oz1asHxYJYK3YGef/3Bu46bn.joVPcN7SM5s8FXPMR/ZP.
+

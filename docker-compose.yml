@@ -24,7 +24,7 @@
 # The following variables are supported:
 #
 # AIRFLOW_IMAGE_NAME           - Docker image name used to run Airflow.
-#                                Default: apache/airflow:2.10.2
+#                                Default: apache/airflow:|version|
 # AIRFLOW_UID                  - User ID in Airflow containers
 #                                Default: 50000
 # AIRFLOW_PROJ_DIR             - Base path to which all the files will be volumed.
@@ -49,7 +49,7 @@ x-airflow-common:
   # In order to add custom dependencies or upgrade provider packages you can use your extended image.
   # Comment the image line, place your Dockerfile in the directory where you placed the docker-compose.yaml
   # and uncomment the "build" line below, Then run `docker-compose build` to build the images.
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2}
+  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.1}
   # build: .
   environment:
     &airflow-common-env
@@ -60,7 +60,8 @@ x-airflow-common:
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
     AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
-    AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
+    AIRFLOW__API__AUTH_BACKENDS: >-
+       airflow.providers.fab.auth_manager.api.auth.backend.basic_auth,airflow.api.auth.backend.session
     # yamllint disable rule:line-length
     # Use simple http server on scheduler for health checks
     # See https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/logging-monitoring/check-health.html#scheduler-health-check-server
@@ -68,7 +69,7 @@ x-airflow-common:
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     # WARNING: Use _PIP_ADDITIONAL_REQUIREMENTS option ONLY for a quick checks
     # for other purpose (development, test and especially production usage) build/extend Airflow image.
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- pandas datetime sqlalchemy requests}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- pandas datetime sqlalchemy requests mysql-connector-python pymysql hvac}
     # The following line can be used to set a custom config file, stored in the local config folder
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
@@ -283,15 +284,6 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
-  vault:
-    image: hashicorp/vault:1.11.5
-    container_name: vault3
-    ports:
-      - "8200:8200"
-    environment:
-      VAULT_DEV_ROOT_TOKEN_ID: root
-      VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"
-    
 
 volumes:
-  postgres-db-volume:  
+  postgres-db-volume:
